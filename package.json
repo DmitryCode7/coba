@@ -1,5 +1,5 @@
 {
-  "name": "coba",
+  "name": "lesson10",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -12,11 +12,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.5.26"
+    "vue": "^3.5.25"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.3",
-    "vite": "^7.3.0",
+    "@vitejs/plugin-vue": "^6.0.2",
+    "vite": "^7.2.4",
     "vite-plugin-vue-devtools": "^8.0.5"
   }
 }

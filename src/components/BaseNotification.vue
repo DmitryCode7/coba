@@ -1,34 +1,48 @@
 <template>
-
-    <div class="notification notification--warning">
-
+    <div class="notification"
+    :class="notificationClass"
+    v-if="isActive"
+    @click="onClick"
+    >
         <div class="notification__icon">
-            <img src="../assets/icons/warning.svg" alt="">
+            <img :src="notificationImage" alt="">
         </div>
-
         <div class="notification__info">
-            <h3>{{ title }}</h3>
+            <slot></slot>
             <p>{{ text }}</p>
         </div>
-
     </div>
-
 </template>
 
 <script>
     export default {
         name: 'BaseNotification',
+        props: [
+            "text", "type",  "isActive"
+        ],
         data() {
             return {
-                title: 'Someting wrong',
-                text: 'Lorem ipsum dolor sit amet',
+              
+            }
+        },
+        computed: {
+            notificationClass() {
+                return 'notification--' + this.type;
+            },
+            notificationImage() {
+                return 'icons/' + this.type + '.svg';
+            }
+
+        },
+        methods: {
+            onClick() {
+                this.$emit('clickOnNotification')
             }
         }
     }
 </script>
 
 <style>
-
     .notification {
         display: flex;
         gap: 20px;
@@ -37,12 +51,12 @@
         max-width: 400px;
     }
 
-    .notification--warning {
+    .notification--danger {
         background-color: #FFF8F8;
         border: 1px solid #F85640;
     }
 
-    .notification--attention {
+    .notification--warning {
         background-color: #FFF8EF;
         border: 1px solid #FBA63C;
     }
@@ -52,7 +66,7 @@
         border: 1px solid #34A770;
     }
 
-    .notification--condition {
+    .notification--info {
         background-color: #E1F2FC;
         border: 1px solid #08A0F7;
     }
@@ -72,28 +86,25 @@
     .notification__info h3 {
         font-size: 13px;
         font-weight: 600;
-        color: #F85640;
     }
 
     .notification__info p {
         font-size: 11px;
-        font-weight: 400;
+    }
+
+    .notification--danger h3 {
+        color: #F85640;
+    }
+
+    .notification--danger p {
         color: #79170A;
     }
 
     .notification--warning h3 {
-        color: #F85640;
-    }
-
-     .notification--warning p {
-        color: #79170A;
-    }
-
-    .notification--attention h3 {
         color: #E18109;
     }
 
-     .notification--attention p {
+    .notification--warning p {
         color: #BC741A;
     }
 
@@ -101,16 +112,15 @@
         color: #13854E;
     }
 
-     .notification--success p {
+    .notification--success p {
         color: #10673E;
     }
 
-    .notification--condition h3 {
+    .notification--info h3 {
         color: #08A0F7;
     }
 
-     .notification--condition p {
+    .notification--info p {
         color: #3387B7;
     }
-
 </style>
